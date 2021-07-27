@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser')
 const express = require('express')
 
 const app = express()
@@ -9,7 +10,7 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use('/api/stuff', (req, res, next) => {
+app.get('/api/stuff', (req, res, next) => {
     const stuff = [
         {
             _id: 'oeihfzeoi',
@@ -29,6 +30,14 @@ app.use('/api/stuff', (req, res, next) => {
           }
     ]
     res.status(200).json(stuff)
+})
+
+// app.use(bodyParser.json())     traiterai tout les requete
+app.post('/api/stuff', (req, res, next) => {
+    console.log(req.body);
+    res.status(201).json({
+        message: 'data sent'
+    })
 })
 
 module.exports = app
