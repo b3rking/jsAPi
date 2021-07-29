@@ -1,6 +1,8 @@
 const bodyParser = require('body-parser')
 const express = require('express')
 const mongoose = require('mongoose')
+const Thing = require('./models/thing')
+
 
 mongoose.connect('mongodb+srv://b3rking:mongodb@cluster0.c4lmd.mongodb.net/mydb?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -8,6 +10,7 @@ mongoose.connect('mongodb+srv://b3rking:mongodb@cluster0.c4lmd.mongodb.net/mydb?
 })
 .then(() => { console.log('connection reussie :)'); })
 .catch((err) => { console.log('connection echoué'+ err); })
+
 
 
 const app = express()
@@ -43,16 +46,13 @@ app.get('/api/stuff', (req, res, next) => {
 
 // app.use(bodyParser.json())     traiterai tout les requete
 app.post('/api/stuff', (req, res, next) => {
-    console.log(req.body);
-    res.status(201).json({
-        message: 'data sent'
-    })
+    const thing = new Thing({
+        ...req.body
+    });
+    thing.save()
+        .then(() => { res.status(201).json({message: 'object creer!'})})
+        .catch(err => { res.status(400).json( err )})
 })
-
-
-
-
-
 
 
 module.exports = app
