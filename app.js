@@ -2,12 +2,12 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://b3rking:<password>@cluster0.c4lmd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://b3rking:mongodb@cluster0.c4lmd.mongodb.net/mydb?retryWrites=true&w=majority', {
     useNewUrlParser: true,
-    useUnifiedTopologie: true
+    useUnifiedTopology: true
 })
 .then(() => { console.log('connection reussie :)'); })
-.catch(() => { console.log('connection echoué'); })
+.catch((err) => { console.log('connection echoué'+ err); })
 
 
 const app = express()
