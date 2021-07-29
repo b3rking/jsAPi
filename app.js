@@ -1,5 +1,14 @@
 const bodyParser = require('body-parser')
 const express = require('express')
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb+srv://b3rking:<password>@cluster0.c4lmd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopologie: true
+})
+.then(() => { console.log('connection reussie :)'); })
+.catch(() => { console.log('connection echoué'); })
+
 
 const app = express()
 
@@ -39,5 +48,11 @@ app.post('/api/stuff', (req, res, next) => {
         message: 'data sent'
     })
 })
+
+
+
+
+
+
 
 module.exports = app
