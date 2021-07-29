@@ -8,4 +8,4 @@ const thingSchema = mongoose.Schema({
     price: { type:String, required: true }
 })
 
-module.exports = mongoose.Schema('Thing', thingSchema)
+module.exports = mongoose.model('Thing', thingSchema)
